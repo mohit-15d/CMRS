@@ -1,0 +1,127 @@
+# ============================================================
+# CMRS - Chain-of-Custody Management & Reporting System
+# Git ignore rules (repository root)
+# ============================================================
+
+# ---------- Secrets (NEVER commit) ----------
+# Real secrets live in backend.env / backend/.env.
+# The committable template is backend/.env.example.
+.env
+.env.*
+!.env.example
+backend.env
+backend.env.*
+!backend.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.jks
+*.keystore
+*.ppk
+id_rsa*
+id_dsa*
+*.kdbx
+secrets/
+credentials.json
+service-account*.json
+
+# ---------- Python ----------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.tox/
+.coverage
+.coverage.*
+htmlcov/
+
+# ---------- Virtual environments ----------
+# NOTE: intentionally no bare "env/" / "ENV/" rule - an unanchored
+# directory pattern would also match a source package named env.
+backend/.venv/
+.venv/
+venv/
+
+# ---------- Encrypted evidence storage ----------
+# Encrypted evidence files live outside the database and must
+# never be committed to version control.
+# Root storage/: keep the placeholder folder, ignore its contents.
+/storage/*
+!/storage/.gitkeep
+# Backend storage/: the encrypted evidence tree (runtime data only).
+# The application recreates these paths on demand - see
+# backend/app/api/routers/evidence.py (_safe_storage_dir / mkdir).
+/backend/storage/
+backend/data/
+data/
+
+# ---------- Generated reports ----------
+# PDF chain-of-custody reports generated at runtime. They embed the
+# case number, evidence SHA-256 hashes and custodian usernames.
+# IMPORTANT: this pattern is ANCHORED to the repository root.
+# An unanchored "reports/" would also match backend/app/reports/,
+# which is the report generator SOURCE CODE and must be committed
+# (generator.py, __init__.py).
+/reports/*
+!/reports/.gitkeep
+
+# ---------- Node / frontend ----------
+node_modules/
+/frontend/dist/
+frontend/.vite/
+*.tsbuildinfo
+
+# ---------- Databases / dumps ----------
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+*.db-journal
+*.dump
+*.bak
+*.backup
+dump.rdb
+
+# ---------- Logs / temp ----------
+*.log
+logs/
+*.tmp
+*.temp
+*.swp
+*.swo
+*~
+*.orig
+*.rej
+*.part
+*.crdownload
+
+# ---------- OS / editor ----------
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.vscode/
+!.vscode/extensions.json
+.idea/
+*.code-workspace
+*.suo
+*.sln
+*.iml
+.vs/
+
+# ---------- Local stray artifacts ----------
+# Empty npm lockfile produced by an accidental `npm install` in the
+# Python backend directory, plus a local test run log.
+backend/package-lock.json
+backend/pytest_out.log

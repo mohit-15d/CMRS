@@ -1,0 +1,43 @@
+# ============================================================
+# CMRS - Chain-of-Custody Management & Reporting System
+# Backend Dependencies
+# Python 3.13+
+#
+# Install with:
+#   python -m venv .venv
+#   .venv\Scripts\python.exe -m pip install -r requirements.txt
+# ============================================================
+
+# ---------- Web framework ----------
+fastapi>=0.115.0            # REST API framework
+uvicorn[standard]>=0.30.0   # ASGI server that runs FastAPI
+
+# ---------- Database (PostgreSQL) ----------
+SQLAlchemy>=2.0.36          # ORM - maps Python classes to PostgreSQL tables
+psycopg[binary]>=3.2.3      # PostgreSQL driver. CMRS uses PostgreSQL, NEVER SQLite.
+alembic>=1.14.0             # Database migrations (schema versioning)
+
+# ---------- Validation & configuration ----------
+pydantic>=2.10.0            # Request/response validation (v2)
+pydantic-settings>=2.6.0    # Load config from .env / environment variables
+python-dotenv>=1.0.1        # Loads the .env file
+email-validator>=2.2.0      # Email validation (used for user registration)
+
+# ---------- Authentication & security ----------
+PyJWT>=2.9.0                # JWT creation and verification
+bcrypt>=4.2.0               # Password hashing
+cryptography>=44.0.0        # AES-256-GCM evidence encryption + SHA-256 helpers
+python-multipart>=0.0.12    # Required by FastAPI for file uploads
+
+# ---------- AI anomaly detection ----------
+numpy>=2.1.0                # Numerical computing
+pandas>=2.2.3               # Data frames (behavioural feature extraction)
+scikit-learn>=1.5.2         # Isolation Forest anomaly detection
+joblib>=1.4.2               # Save/load trained models
+
+# ---------- Reports ----------
+reportlab>=4.2.0            # PDF chain-of-custody report generation
+
+# ---------- Testing ----------
+pytest>=8.3.0               # Unit/integration test runner
+httpx>=0.27.0               # HTTP client required by FastAPI TestClient

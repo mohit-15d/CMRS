@@ -1,0 +1,1 @@
+# CMRS core configuration package.

@@ -50,7 +50,7 @@ class UserPublic(BaseModel):
 
     id: UUID
     username: str
-    email: EmailStr
+    email: str
     full_name: str | None = None
     role: str
     is_active: bool

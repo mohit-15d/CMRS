@@ -102,12 +102,7 @@ Fill in real secret values. **Never commit `.env`.**
 
 ---
 
-## Session status
 
-| Phase | Description | Status |
-| --- | --- | --- |
-| 1 | Project setup | ✔ In progress |
-| 2–24 | Remaining phases | To be built incrementally |
 
 ## Security notes
 

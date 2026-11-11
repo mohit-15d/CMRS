@@ -125,3 +125,23 @@ $RECYCLE.BIN/
 # Python backend directory, plus a local test run log.
 backend/package-lock.json
 backend/pytest_out.log
+
+# ---------- Manuscripts and Office documents ----------
+*.docx
+*.doc
+*.pptx
+*.xlsx
+
+# ---------- Experimental outputs & benchmark results ----------
+experiments/
+*.csv
+CMRS_EXPERIMENT_AUDIT_REPORT.md
+
+# ---------- Local auxiliary / audit scripts ----------
+build_complete_audit_doc.py
+check_lines.py
+check_section19.py
+check_section19b.py
+create_audit_doc.py
+fix_doc.py
+docs/generate_tech_doc.py

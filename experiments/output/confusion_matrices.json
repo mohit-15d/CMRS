@@ -1,0 +1,70 @@
+{
+  "Isolation Forest": {
+    "tp": 71,
+    "tn": 871,
+    "fp": 29,
+    "fn": 29,
+    "matrix_rows_true_0_1": [
+      [
+        871,
+        29
+      ],
+      [
+        29,
+        71
+      ]
+    ],
+    "predicted_anomalies": 100
+  },
+  "One-Class SVM": {
+    "tp": 50,
+    "tn": 850,
+    "fp": 50,
+    "fn": 50,
+    "matrix_rows_true_0_1": [
+      [
+        850,
+        50
+      ],
+      [
+        50,
+        50
+      ]
+    ],
+    "predicted_anomalies": 100
+  },
+  "LOF": {
+    "tp": 29,
+    "tn": 829,
+    "fp": 71,
+    "fn": 71,
+    "matrix_rows_true_0_1": [
+      [
+        829,
+        71
+      ],
+      [
+        71,
+        29
+      ]
+    ],
+    "predicted_anomalies": 100
+  },
+  "Rule-based": {
+    "tp": 87,
+    "tn": 754,
+    "fp": 146,
+    "fn": 13,
+    "matrix_rows_true_0_1": [
+      [
+        754,
+        146
+      ],
+      [
+        13,
+        87
+      ]
+    ],
+    "predicted_anomalies": 233
+  }
+}

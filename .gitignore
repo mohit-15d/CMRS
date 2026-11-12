@@ -133,8 +133,21 @@ backend/pytest_out.log
 *.xlsx
 
 # ---------- Experimental outputs & benchmark results ----------
-experiments/
+/experiments/*
+!/experiments/README.md
+!/experiments/generate_synthetic_sessions.py
+!/experiments/evaluate_detectors.py
+!/experiments/output/
+/experiments/output/*
+!/experiments/output/synthetic_sessions.csv
+!/experiments/output/confusion_matrices.json
+!/experiments/output/metrics.json
+!/experiments/output/experiment_log.txt
+!/experiments/output/table3.csv
+!/experiments/output/table3.md
 *.csv
+!/experiments/output/synthetic_sessions.csv
+!/experiments/output/table3.csv
 CMRS_EXPERIMENT_AUDIT_REPORT.md
 
 # ---------- Local auxiliary / audit scripts ----------

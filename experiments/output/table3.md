@@ -1,0 +1,11 @@
+Table 3. Anomaly detection: Isolation Forest vs. three baseline methods (synthetic data).
+
+| Method | Precision | Recall | F1-score |
+|---|---:|---:|---:|
+| Isolation Forest | 0.710 | 0.710 | 0.710 |
+| One-Class SVM | 0.500 | 0.500 | 0.500 |
+| LOF | 0.290 | 0.290 | 0.290 |
+| Rule-based | 0.373 | 0.870 | 0.523 |
+
+Values are measured from the primary run (dataset seed 42, model seed 42),
+formatted to three decimals; full-precision values are in metrics.json.

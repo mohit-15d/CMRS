@@ -1,0 +1,82 @@
+CMRS experiment log - generated 2026-11-07T19:37:00
+==============================================================================
+CMRS Section 4.5 - anomaly detection experiment
+==============================================================================
+dataset file      : experiments\output\synthetic_sessions.csv
+dataset sha256    : BAB4140BF159919243E2E50833F7F674F3B3F8F721A7029D2122230D7EB2BAC0
+model seed        : 42
+python/sklearn    : 3.13.1 / sklearn 1.9.0
+
+DATASET VERIFICATION
+  rows: 1000
+  normal: 900
+  anomaly: 100
+  nan_cells: 0
+  duplicate_session_ids: 0
+  normal_off_hours_pct: 8.44
+  normal_download_gt55mb_pct: 4.78
+  normal_failed_logins_ge2_pct: 3.67
+  normal_cross_case_pct: 2.67
+  anomaly_off_hours_pct: 44.0
+  anomaly_download_gt55mb_pct: 43.0
+  anomaly_failed_logins_ge2_pct: 52.0
+  anomaly_cross_case_pct: 45.0
+  normal_flagged_by_rule_pct: 16.22
+  anomaly_flagged_by_rule_pct: 87.0
+
+PRIMARY RESULTS (model seed 42; metrics from binary predictions)
+
+Isolation Forest
+  parameters            : {"n_estimators": 200, "contamination": 0.1, "random_state": 42}
+  score                 : continuous anomaly score = -decision_function (higher = more anomalous)
+  predicted anomalies   : 100
+  precision / recall/F1 : 0.710000 / 0.710000 / 0.710000
+  accuracy              : 0.942000
+  roc_auc               : 0.950467
+  confusion (tn, fp, fn, tp): (871, 29, 29, 71)
+
+One-Class SVM
+  parameters            : {"kernel": "rbf", "nu": 0.1, "gamma": "scale (sklearn default)", "random_state": null}
+  score                 : continuous anomaly score = -decision_function; sklearn's OneClassSVM exposes no random_state (deterministic libsvm solver), so none is set
+  predicted anomalies   : 100
+  precision / recall/F1 : 0.500000 / 0.500000 / 0.500000
+  accuracy              : 0.900000
+  roc_auc               : 0.882722
+  confusion (tn, fp, fn, tp): (850, 50, 50, 50)
+
+LOF
+  parameters            : {"n_neighbors": 20, "novelty": false, "contamination": 0.1, "random_state": null}
+  score                 : continuous anomaly score = -negative_outlier_factor_ (higher = more anomalous); LOF has no random_state (deterministic)
+  predicted anomalies   : 100
+  precision / recall/F1 : 0.290000 / 0.290000 / 0.290000
+  accuracy              : 0.858000
+  roc_auc               : 0.771622
+  confusion (tn, fp, fn, tp): (829, 71, 71, 29)
+
+Rule-based
+  parameters            : {"off_hours": "unusual_access_time == 1", "volume_mb": "evidence_access_volume > 55.0", "failed_logins": "failed_login_count >= 2"}
+  score                 : binary rule only - no continuous score exists, so ROC-AUC is reported as null; a rule ROC-AUC would not be comparable with the continuous detectors
+  predicted anomalies   : 233
+  precision / recall/F1 : 0.373391 / 0.870000 / 0.522523
+  accuracy              : 0.841000
+  roc_auc               : n/a
+  confusion (tn, fp, fn, tp): (754, 146, 13, 87)
+
+TABLE 3 (measured)
+  Isolation Forest   precision=0.710  recall=0.710  f1=0.710
+  One-Class SVM      precision=0.500  recall=0.500  f1=0.500
+  LOF                precision=0.290  recall=0.290  f1=0.290
+  Rule-based         precision=0.373  recall=0.870  f1=0.523
+
+10-SEED RESULTS (seeds 0-9; dataset regenerated per seed; mean +/- sample std)
+
+Method                     Precision            Recall                F1          Accuracy           ROC-AUC
+------------------------------------------------------------------------------------------------------------
+Isolation Forest   0.6880 +/- 0.0278 0.6880 +/- 0.0278 0.6880 +/- 0.0278 0.9376 +/- 0.0056 0.9558 +/- 0.0037
+One-Class SVM      0.4905 +/- 0.0308 0.4930 +/- 0.0340 0.4917 +/- 0.0319 0.8981 +/- 0.0061 0.8841 +/- 0.0130
+LOF                0.3250 +/- 0.0344 0.3250 +/- 0.0344 0.3250 +/- 0.0344 0.8650 +/- 0.0069 0.7091 +/- 0.0400
+Rule-based         0.3946 +/- 0.0225 0.8890 +/- 0.0354 0.5463 +/- 0.0261 0.8521 +/- 0.0120               n/a
+
+ROC-AUC for the rule-based baseline is n/a: the rule produces a binary
+decision only, so no comparable continuous score exists.
+

@@ -145,6 +145,8 @@ backend/pytest_out.log
 !/experiments/output/experiment_log.txt
 !/experiments/output/table3.csv
 !/experiments/output/table3.md
+!/experiments/additional_validation/
+!/experiments/additional_validation/**
 *.csv
 !/experiments/output/synthetic_sessions.csv
 !/experiments/output/table3.csv

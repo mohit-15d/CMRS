@@ -1,0 +1,253 @@
+{
+  "experiment": "CMRS Part B: Repeated Cryptographic & Ledger Performance Benchmarks",
+  "system_info": {
+    "os": "Windows-11-10.0.26300-SP0",
+    "cpu": "Intel64 Family 6 Model 141 Stepping 1, GenuineIntel",
+    "logical_cores": 12,
+    "ram_total_gb": 7.73,
+    "python": "3.13.1",
+    "cryptography": "50.0.0",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5"
+  },
+  "protocol": {
+    "timer": "time.perf_counter_ns()",
+    "warmup_iterations": 5,
+    "measured_repetitions": 30,
+    "ephemeral_key_used": true,
+    "real_evidence_used": false
+  },
+  "A_cryptographic_microbenchmarks": {
+    "1 KB": {
+      "payload_bytes": 1024,
+      "sha256_hash": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.0023,
+        "median_ms": 0.0021,
+        "std_ms": 0.0005,
+        "p95_ms": 0.003,
+        "min_ms": 0.0017,
+        "max_ms": 0.0033
+      },
+      "aes_256_gcm_encrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.0039,
+        "median_ms": 0.0038,
+        "std_ms": 0.0003,
+        "p95_ms": 0.004,
+        "min_ms": 0.0037,
+        "max_ms": 0.0054
+      },
+      "aes_256_gcm_decrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.0041,
+        "median_ms": 0.0037,
+        "std_ms": 0.0008,
+        "p95_ms": 0.0056,
+        "min_ms": 0.0035,
+        "max_ms": 0.0058
+      }
+    },
+    "1 MB": {
+      "payload_bytes": 1048576,
+      "sha256_hash": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.6991,
+        "median_ms": 0.6567,
+        "std_ms": 0.0815,
+        "p95_ms": 0.8614,
+        "min_ms": 0.6344,
+        "max_ms": 0.9319
+      },
+      "aes_256_gcm_encrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.8824,
+        "median_ms": 0.894,
+        "std_ms": 0.109,
+        "p95_ms": 1.0568,
+        "min_ms": 0.7059,
+        "max_ms": 1.1643
+      },
+      "aes_256_gcm_decrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 1.0701,
+        "median_ms": 1.0769,
+        "std_ms": 0.1938,
+        "p95_ms": 1.32,
+        "min_ms": 0.7244,
+        "max_ms": 1.5822
+      }
+    },
+    "10 MB": {
+      "payload_bytes": 10485760,
+      "sha256_hash": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 7.0737,
+        "median_ms": 7.1928,
+        "std_ms": 0.3574,
+        "p95_ms": 7.4999,
+        "min_ms": 6.5009,
+        "max_ms": 7.7168
+      },
+      "aes_256_gcm_encrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 12.5401,
+        "median_ms": 12.5438,
+        "std_ms": 0.5406,
+        "p95_ms": 13.4114,
+        "min_ms": 11.4795,
+        "max_ms": 13.6009
+      },
+      "aes_256_gcm_decrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 10.1513,
+        "median_ms": 10.0022,
+        "std_ms": 0.6239,
+        "p95_ms": 11.3701,
+        "min_ms": 9.4152,
+        "max_ms": 12.2975
+      }
+    },
+    "25 MB": {
+      "payload_bytes": 26214400,
+      "sha256_hash": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 15.7612,
+        "median_ms": 15.4435,
+        "std_ms": 0.6701,
+        "p95_ms": 17.1324,
+        "min_ms": 15.0533,
+        "max_ms": 17.3331
+      },
+      "aes_256_gcm_encrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 33.1266,
+        "median_ms": 34.474,
+        "std_ms": 4.1636,
+        "p95_ms": 38.0645,
+        "min_ms": 23.9611,
+        "max_ms": 40.0865
+      },
+      "aes_256_gcm_decrypt": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 26.0389,
+        "median_ms": 23.4962,
+        "std_ms": 6.8675,
+        "p95_ms": 36.7677,
+        "min_ms": 19.1647,
+        "max_ms": 39.8946
+      }
+    }
+  },
+  "B_in_memory_end_to_end_processing": {
+    "1 KB": {
+      "payload_bytes": 1024,
+      "combined_hash_encrypt_decrypt_verify": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 0.0108,
+        "median_ms": 0.0103,
+        "std_ms": 0.0024,
+        "p95_ms": 0.011,
+        "min_ms": 0.0101,
+        "max_ms": 0.0234
+      }
+    },
+    "1 MB": {
+      "payload_bytes": 1048576,
+      "combined_hash_encrypt_decrypt_verify": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 3.9199,
+        "median_ms": 3.8494,
+        "std_ms": 0.4391,
+        "p95_ms": 4.6689,
+        "min_ms": 3.0516,
+        "max_ms": 4.8966
+      }
+    },
+    "10 MB": {
+      "payload_bytes": 10485760,
+      "combined_hash_encrypt_decrypt_verify": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 38.9424,
+        "median_ms": 39.829,
+        "std_ms": 3.0655,
+        "p95_ms": 42.6649,
+        "min_ms": 32.0211,
+        "max_ms": 45.067
+      }
+    },
+    "25 MB": {
+      "payload_bytes": 26214400,
+      "combined_hash_encrypt_decrypt_verify": {
+        "warmup_iterations": 5,
+        "measured_repetitions": 30,
+        "unit": "ms",
+        "mean_ms": 78.5049,
+        "median_ms": 82.1604,
+        "std_ms": 6.8301,
+        "p95_ms": 85.6539,
+        "min_ms": 67.7033,
+        "max_ms": 88.5166
+      }
+    }
+  },
+  "C_in_memory_chained_hash_ledger": {
+    "record_count": 1000,
+    "single_record_hash_calculation": {
+      "warmup_iterations": 5,
+      "measured_repetitions": 30,
+      "unit": "ms",
+      "mean_ms": 0.0105,
+      "median_ms": 0.0105,
+      "std_ms": 0.0002,
+      "p95_ms": 0.0111,
+      "min_ms": 0.0102,
+      "max_ms": 0.0112
+    },
+    "full_1000_record_chain_verification": {
+      "warmup_iterations": 5,
+      "measured_repetitions": 30,
+      "unit": "ms",
+      "mean_ms": 12.0178,
+      "median_ms": 11.7495,
+      "std_ms": 0.822,
+      "p95_ms": 13.8267,
+      "min_ms": 11.0954,
+      "max_ms": 14.178
+    }
+  },
+  "D_database_backed_measurements": {
+    "executed": false,
+    "reason": "No separate controlled PostgreSQL benchmark database is available in the sandboxed environment; development database was not accessed or modified. In-memory benchmarks (A-C) measure pure CPU/cryptographic overhead only and do NOT represent PostgreSQL transaction, pg_advisory_xact_lock, or disk I/O latency."
+  }
+}

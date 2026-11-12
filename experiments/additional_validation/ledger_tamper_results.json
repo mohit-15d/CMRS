@@ -1,0 +1,46 @@
+{
+  "experiment": "CMRS Standalone Chained-Hash Ledger Tamper & HMAC Checkpoint Verification",
+  "notice": "Newly implemented standalone verification script using CMRS canonical SHA-256 ledger helpers in-memory. Production backend/app/security/audit_ledger.py uses unkeyed SHA-256 chaining without HMAC checkpoints.",
+  "valid_baseline": {
+    "tested": 20,
+    "passed": 20
+  },
+  "tampered_chain_tests": {
+    "total_tested": 200,
+    "total_detected": 200,
+    "overall_detection_rate": 1.0,
+    "by_mode": {
+      "details_modified": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      },
+      "action_modified": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      },
+      "timestamp_modified": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      },
+      "previous_hash_broken": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      },
+      "record_deleted": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      }
+    }
+  },
+  "hmac_checkpoint_prototype_tests": {
+    "ephemeral_key_used": true,
+    "valid_checkpoint_accepted": true,
+    "forged_signature_rejected": true,
+    "truncated_chain_rejected": true
+  }
+}

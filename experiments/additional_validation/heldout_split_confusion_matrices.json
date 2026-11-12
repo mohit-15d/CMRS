@@ -1,0 +1,87 @@
+{
+  "Isolation Forest (contamination=0.10)": {
+    "tp": 17,
+    "tn": 162,
+    "fp": 18,
+    "fn": 3,
+    "matrix_rows_true_0_1": [
+      [
+        162,
+        18
+      ],
+      [
+        3,
+        17
+      ]
+    ],
+    "predicted_anomalies": 35
+  },
+  "Isolation Forest (contamination='auto')": {
+    "tp": 19,
+    "tn": 140,
+    "fp": 40,
+    "fn": 1,
+    "matrix_rows_true_0_1": [
+      [
+        140,
+        40
+      ],
+      [
+        1,
+        19
+      ]
+    ],
+    "predicted_anomalies": 59
+  },
+  "One-Class SVM (nu=0.10)": {
+    "tp": 16,
+    "tn": 157,
+    "fp": 23,
+    "fn": 4,
+    "matrix_rows_true_0_1": [
+      [
+        157,
+        23
+      ],
+      [
+        4,
+        16
+      ]
+    ],
+    "predicted_anomalies": 39
+  },
+  "LOF (novelty=True, contamination=0.10)": {
+    "tp": 15,
+    "tn": 158,
+    "fp": 22,
+    "fn": 5,
+    "matrix_rows_true_0_1": [
+      [
+        158,
+        22
+      ],
+      [
+        5,
+        15
+      ]
+    ],
+    "predicted_anomalies": 37
+  },
+  "Rule-based (fixed)": {
+    "tp": 19,
+    "tn": 156,
+    "fp": 24,
+    "fn": 1,
+    "matrix_rows_true_0_1": [
+      [
+        156,
+        24
+      ],
+      [
+        1,
+        19
+      ]
+    ],
+    "predicted_anomalies": 43
+  }
+}

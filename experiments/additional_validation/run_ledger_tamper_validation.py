@@ -5,12 +5,13 @@ script). Uses CMRS's actual canonical SHA-256 ledger helpers in-memory without
 touching PostgreSQL or any original experiment files.
 
 Tests:
-1. 200 independent tampered chains (40 each across 5 attack modes):
+1. 240 independent tampered chains (40 each across 6 attack modes):
    - details_modified: alters a field inside `details`
    - action_modified: alters `action` / `result`
    - timestamp_modified: alters `created_at`
    - previous_hash_broken: alters `previous_hash` link
    - record_deleted: drops an interior record from the chain
+   - record_reordered: swaps adjacent interior records or reverses a multi-record slice
 2. Prototype HMAC-SHA256 checkpoint verification (using an ephemeral test key):
    - Valid checkpoint verification
    - Tampered checkpoint tag detection
@@ -55,6 +56,7 @@ TAMPER_MODES = (
     "timestamp_modified",
     "previous_hash_broken",
     "record_deleted",
+    "record_reordered",
 )
 
 
@@ -124,6 +126,15 @@ def tamper_chain(records: list[AuditLog], mode: str, idx: int) -> list[AuditLog]
         rec.previous_hash = "0" * 64
     elif mode == "record_deleted":
         mutated.pop(target_pos)
+    elif mode == "record_reordered":
+        if idx % 2 == 0:
+            # Adjacent-record swap in the middle of the chain
+            pos = 4 + (idx % 10)
+            mutated[pos], mutated[pos + 1] = mutated[pos + 1], mutated[pos]
+        else:
+            # Multi-record reordering (reverse a 4-record interior slice)
+            start = 3 + (idx % 10)
+            mutated[start : start + 4] = list(reversed(mutated[start : start + 4]))
     else:
         raise ValueError(f"Unknown tamper mode: {mode}")
     return mutated
@@ -155,7 +166,7 @@ def main() -> None:
             valid_passed += 1
     assert valid_passed == 20
 
-    # 2. 200 tampered chains (40 per mode x 5 modes)
+    # 2. 240 tampered chains (40 per mode x 6 modes)
     mode_results = {}
     total_tampered = 0
     total_detected = 0
@@ -175,8 +186,7 @@ def main() -> None:
         total_tampered += NUM_CHAINS_PER_MODE
         total_detected += detected
 
-    assert total_tampered == 200
-    assert total_detected == 200
+    assert total_tampered == 240
 
     # 3. Ephemeral HMAC-SHA256 checkpoint tests
     ephemeral_hmac_key = secrets.token_bytes(32)
@@ -227,10 +237,14 @@ def main() -> None:
     print("CMRS Standalone Ledger Integrity & HMAC Checkpoint Verification")
     print("=" * 78)
     print(f"Valid baseline chains   : {valid_passed}/20 passed")
-    print(f"Tampered chains detected: {total_detected}/{total_tampered} (100.0%)")
+    pct = 100.0 * total_detected / total_tampered
+    print(f"Tampered chains detected: {total_detected}/{total_tampered} ({pct:.1f}%)")
     for mode, stats in mode_results.items():
         print(f"  - {mode:<22}: {stats['detected']}/{stats['tested']} detected")
-    print("HMAC checkpoint tests   : valid=True, forged_rejected=True, truncation_rejected=True")
+    print(
+        f"HMAC checkpoint tests   : valid={hmac_valid_ok}, "
+        f"forged_rejected={hmac_forged_rejected}, truncation_rejected={hmac_truncation_rejected}"
+    )
 
 
 if __name__ == "__main__":

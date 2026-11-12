@@ -6,8 +6,8 @@
     "passed": 20
   },
   "tampered_chain_tests": {
-    "total_tested": 200,
-    "total_detected": 200,
+    "total_tested": 240,
+    "total_detected": 240,
     "overall_detection_rate": 1.0,
     "by_mode": {
       "details_modified": {
@@ -31,6 +31,11 @@
         "detection_rate": 1.0
       },
       "record_deleted": {
+        "tested": 40,
+        "detected": 40,
+        "detection_rate": 1.0
+      },
+      "record_reordered": {
         "tested": 40,
         "detected": 40,
         "detection_rate": 1.0

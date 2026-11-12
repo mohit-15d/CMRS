@@ -12,7 +12,7 @@ Isolated validation folder addressing reviewer requests without modifying **any*
    - Uses temporary synthetic byte payloads and an ephemeral encryption key. Database-backed PostgreSQL measurements are explicitly excluded.
 3. **Part C — Standalone Ledger Integrity & HMAC Checkpoint Verification (`run_ledger_tamper_validation.py`):**
    - Newly implemented standalone verification script (not the lost original paper script) using CMRS's canonical SHA-256 ledger helpers in-memory.
-   - Tests 20 valid baseline chains, 200 tampered chains across 5 attack modes (`details_modified`, `action_modified`, `timestamp_modified`, `previous_hash_broken`, `record_deleted`), and ephemeral-key HMAC-SHA256 checkpoint verification (`ledger_tamper_results.json`).
+   - Tests 20 valid baseline chains, 240 tampered chains across 6 attack modes (`details_modified`, `action_modified`, `timestamp_modified`, `previous_hash_broken`, `record_deleted`, `record_reordered`), and ephemeral-key HMAC-SHA256 checkpoint verification (`ledger_tamper_results.json`).
    - *Note: Production `backend/app/security/audit_ledger.py` uses unkeyed SHA-256 hash chaining without HMAC checkpoints.*
 
 ## Reproduction
